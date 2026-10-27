@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#163832">
+  <meta name="description" content="A diagnostic reasoning study game for SOCW 552 Weeks 1-7.">
+  <title>Diagnostic Detective | SOCW 552</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the game</a>
+
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Diagnostic Detective home">
+      <span class="brand-mark" aria-hidden="true">DD</span>
+      <span>
+        <strong>Diagnostic Detective</strong>
+        <small>SOCW 552 · Weeks 1–7</small>
+      </span>
+    </a>
+    <button id="reset-progress" class="text-button" type="button">Reset progress</button>
+  </header>
+
+  <main id="main">
+    <section id="home-view" class="view active" aria-labelledby="home-title">
+      <div class="hero">
+        <div class="eyebrow">CASE FILE 552</div>
+        <h1 id="home-title">Spot the pattern.<br><em>Build the diagnosis.</em></h1>
+        <p>Practice the exact rhythm of clinical reasoning: symptoms, duration, impairment, exclusions, and specifiers.</p>
+      </div>
+
+      <section class="stats-panel" aria-label="Study progress">
+        <div class="stat">
+          <span id="accuracy-stat" class="stat-value">—</span>
+          <span class="stat-label">Accuracy</span>
+        </div>
+        <div class="stat">
+          <span id="mastered-stat" class="stat-value">0</span>
+          <span class="stat-label">Mastered</span>
+        </div>
+        <div class="stat">
+          <span id="streak-stat" class="stat-value">0</span>
+          <span class="stat-label">Best streak</span>
+        </div>
+      </section>
+
+      <section class="mode-section" aria-labelledby="choose-mode">
+        <div class="section-heading">
+          <div>
+            <span class="section-number">01</span>
+            <h2 id="choose-mode">Choose a study mode</h2>
+          </div>
+          <p>Your progress stays on this device.</p>
+        </div>
+
+        <div class="mode-grid">
+          <button class="mode-card accent-coral" data-mode="quick" type="button">
+            <span class="mode-icon" aria-hidden="true">01</span>
+            <span class="mode-title">Quick Quiz</span>
+            <span class="mode-copy">Ten mixed questions from all seven weeks.</span>
+            <span class="mode-meta">10 questions · mixed topics</span>
+          </button>
+
+          <button class="mode-card accent-gold" data-mode="case" type="button">
+            <span class="mode-icon" aria-hidden="true">A–E</span>
+            <span class="mode-title">Case Challenge</span>
+            <span class="mode-copy">Read the vignette and select the best diagnosis or criterion.</span>
+            <span class="mode-meta">Clinical reasoning · specifiers</span>
+          </button>
+
+          <button class="mode-card accent-mint" data-mode="duration" type="button">
+            <span class="mode-icon" aria-hidden="true">6M</span>
+            <span class="mode-title">Duration Sprint</span>
+            <span class="mode-copy">Lock in the time thresholds that separate similar disorders.</span>
+            <span class="mode-meta">Fast recall · high yield</span>
+          </button>
+
+          <button id="review-mode" class="mode-card accent-blue" data-mode="review" type="button">
+            <span class="mode-icon" aria-hidden="true">↻</span>
+            <span class="mode-title">Review Missed</span>
+            <span class="mode-copy">Revisit the questions that need another pass.</span>
+            <span id="review-count" class="mode-meta">0 questions waiting</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="memory-strip" aria-labelledby="memory-formula">
+        <span class="section-number">02</span>
+        <div>
+          <h2 id="memory-formula">The six-part memory formula</h2>
+          <div class="formula" aria-label="Pattern, number, duration, impairment, exclusions, specifier">
+            <span>Pattern</span><b>→</b><span>Number</span><b>→</b><span>Duration</span><b>→</b><span>Impairment</span><b>→</b><span>Exclusions</span><b>→</b><span>Specifier</span>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="quiz-view" class="view" aria-labelledby="question-title">
+      <div class="quiz-shell">
+        <div class="quiz-topline">
+          <button id="exit-quiz" class="text-button back-button" type="button">← Exit</button>
+          <span id="mode-label" class="eyebrow">QUICK QUIZ</span>
+          <span id="question-count">1 / 10</span>
+        </div>
+
+        <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+
+        <article class="question-card">
+          <div class="question-meta">
+            <span id="week-badge" class="badge">Week 1</span>
+            <span id="category-label">DSM Foundations</span>
+          </div>
+          <h1 id="question-title">Question</h1>
+          <div id="answer-options" class="answer-options" role="group" aria-label="Answer choices"></div>
+
+          <div id="feedback" class="feedback" aria-live="polite" hidden>
+            <div class="feedback-heading">
+              <span id="feedback-icon" aria-hidden="true"></span>
+              <strong id="feedback-title"></strong>
+            </div>
+            <p id="feedback-copy"></p>
+            <div id="memory-cue" class="memory-cue"></div>
+          </div>
+
+          <button id="next-question" class="primary-button" type="button" hidden>Next question →</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="results-view" class="view" aria-labelledby="results-title">
+      <div class="results-card">
+        <span class="eyebrow">CASE CLOSED</span>
+        <div id="result-ring" class="result-ring"><span id="result-percent">0%</span></div>
+        <h1 id="results-title">Session complete</h1>
+        <p id="result-message"></p>
+        <div class="result-details">
+          <div><strong id="correct-result">0</strong><span>Correct</span></div>
+          <div><strong id="streak-result">0</strong><span>Best streak</span></div>
+          <div><strong id="missed-result">0</strong><span>To review</span></div>
+        </div>
+        <div class="result-actions">
+          <button id="play-again" class="primary-button" type="button">Play again</button>
+          <button id="return-home" class="secondary-button" type="button">Choose another mode</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built from the SOCW 552 Weeks 1–7 study compilation. Educational practice only—not a clinical diagnostic tool.</p>
+  </footer>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
